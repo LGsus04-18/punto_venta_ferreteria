@@ -1,15 +1,15 @@
 /* 
 ======================================================================
-====  
-   CSS GLOBAL UNIFICADO Y RESPONSIVO - FERRETERÍA "LOS CHICARCAS"  
+  
+     FERRETERÍA "LOS CHICARCAS"  
    
 ======================================================================
-==== */  
+ */  
   
 :root {  
     --color-fondo-oscuro: #1A2229;  /* Color del sidebar y header */  
-    --color-principal-naranja: #FF5A00; /* Naranja Chicarca */  
-    --color-fondo-gris-claro: #F5F7FA; /* Fondo de las páginas */  
+    --color-principal-naranja: #FF5A00;  
+    --color-fondo-gris-claro: #F5F7FA;  
     --color-texto-blanco: #FFFFFF;  
     --color-texto-gris: #A0AEC0;  
     --color-tarjetas: #FFFFFF;  
@@ -28,16 +28,16 @@
 body {  
     background-color: var(--color-fondo-gris-claro);  
     color: #333;  
-    overflow-x: hidden; /* Evita scrolls laterales raros en cel */ 
+    overflow-x: hidden; 
 }  
   
 /* 
 ======================================================================
-====  
-   BARRA SUPERIOR (HEADER) FIXED 
+  
+   BARRA SUPERIOR (HEADER) 
    
 ======================================================================
-==== */  
+ */  
 .navbar-top {  
     height: 70px; 
     position: fixed; 
@@ -59,7 +59,8 @@ body {
     color: var(--color-texto-blanco);  
     cursor: pointer;  
     margin-right: 15px;  
-    user-select: none;  
+    user-select: none;
+    transition: transform 0.4s ease-in-out;  
 } 
   
 .logo-area {  
@@ -89,12 +90,11 @@ img.perfil {
 } 
   
 /* 
-======================================================================
-====  
+======================================================================  
    ESTRUCTURA DEL CUERPO (LAYOUT Y SIDEBAR) 
    
 ======================================================================
-==== */  
+ */  
 .contenedor-principal {  
     display: flex;  
     margin-top: 70px; /* Desfase para que el contenido no se meta abajo del header */  
@@ -116,14 +116,16 @@ img.perfil {
     box-shadow: 4px 0 10px rgba(0,0,0,0.2);
 }  
  
-/* MÁGICA DE LA HAMBURGUESA: Si el check está activo, el menú lateral sale de su 
-escondite */ 
+/* Menu hamburguesa desplegable */ 
 #toggle-sidebar-check:checked ~ .contenedor-principal .sidebar {  
     left: 0; 
-}  
+}
+
+#toggle-sidebar-check:checked ~ .btn-hamburguesa-toggle{
+    transform: rotate(90deg);
+}
  
-/* Si el menú sale en compu grande, empuja el contenido hacia la derecha para que no lo 
-tape */ 
+ 
 @media (min-width: 993px) { 
     #toggle-sidebar-check:checked ~ .contenedor-principal .contenido-pagina {  
         margin-left: 260px; 
@@ -161,12 +163,12 @@ tape */
     width: 100%;  
     padding: 20px;
     display: flex;
-    flex-direction: row !important; /* Lado a lado por defecto */
+    flex-direction: row !important;
     gap: 20px;
     height: 100%;
 }  
   
-/* Columnas de Venta de Lado a Lado */  
+/* Columnas de Venta*/  
 .col-izquierda {  
     flex: 2; 
     background: var(--color-tarjetas); 
@@ -179,7 +181,7 @@ tape */
 }  
   
 .col-derecha {  
-    width: 360px; /* Reducimos un pelín el ancho fijo para que quepa en laptops chicas */
+    width: 360px; 
     background: var(--color-tarjetas); 
     border-radius: 12px; 
     padding: 25px; 
@@ -191,11 +193,11 @@ tape */
   
 /* 
 ======================================================================
-====  
+  
    COMPONENTES GRÁFICOS (TABLAS, BUSCADOR, BOTONES)  
    
 ======================================================================
-==== */  
+ */  
 .buscador-caja {  
     width: 100%;  
     padding: 12px 16px;  
@@ -278,11 +280,11 @@ td {
   
 /* 
 ======================================================================
-====  
-   PANTALLA DE LOGIN (CONSERVADA EXCELENTE)  
+ 
+   ESTILOS DE LA PANTALLA DE LOGIN  
    
 ======================================================================
-==== */  
+ */  
 .login-contenedor {  
     min-height: 100vh;  
     display: flex;  
@@ -302,9 +304,18 @@ td {
     text-align: center;  
 } 
  
-.login-tarjeta form { text-align: left; margin-top: 20px; } 
-.login-tarjeta label { font-weight: 600; font-size: 14px; color: #333333; display: block; 
-margin-bottom: 5px; } 
+.login-tarjeta form { 
+    text-align: left; 
+    margin-top: 20px; 
+}
+
+.login-tarjeta label { 
+    font-weight: 600; 
+    font-size: 14px; 
+    color: #333333; 
+    display: block; 
+    margin-bottom: 5px; 
+} 
   
 .login-tarjeta input {  
     width: 100%;  
@@ -343,11 +354,11 @@ margin-bottom: 5px; }
  
 /* 
 ======================================================================
-==== 
-   Timbre de Notificaciones y Dropdowns 
+ 
+   Timbre de Notificaciones 
    
 ======================================================================
-==== */ 
+ */ 
 .notificacion-contenedor { display: inline-block; position: relative; } 
 .punto-alerta-naranja { 
     position: absolute; 
@@ -395,20 +406,18 @@ text-align: center; }
  
 /* 
 ======================================================================
-==== 
-   
-�
-�
- CAPA DE MEDIA QUERIES RESPONSIVAS (MÓVIL / TABLET) 
+
+        CAPA DE MEDIA QUERIES RESPONSIVAS 
+
 ======================================================================
-==== */ 
+ */ 
 @media (max-width: 992px) { 
     .contenido-pagina { 
-    flex-direction: column; /* El carrito baja automáticamente en pantallas chicas */ 
+    flex-direction: column;  
     padding: 15px; 
     } 
     .col-derecha { 
-    width: 100%; /* El carrito ocupa todo el ancho abajo */ 
+    width: 100%;  
     }
 
     #toggle-sidebar-check:checked ~ .contenedor-principal .contenido-pagina{
@@ -418,13 +427,12 @@ text-align: center; }
 
 /* 
 ======================================================================
-==== 
-   AFINACIÓN ESTÉTICA Y TIPOGRAFÍA - LOS CHICARCAS 
+ 
+   AFINACIÓN ESTÉTICA Y TIPOGRAFÍA 
    
 ======================================================================
-==== */ 
- 
-/* Forzamos la tipografía limpia y en mayúsculas para los títulos */ 
+ */ 
+  
 .logo-texto {
     display: flex;
     flex-direction: column;
@@ -473,7 +481,7 @@ text-align: center; }
 @media (min-width: 769px) and (max-width: 1024px) {
     .navbar-top { padding: 0 15px; }
     .col-derecha {
-        width: 300px; /* Hacemos el carrito más flaquito para que quepa de lado */
+        width: 300px;
         padding: 15px;
     }
     .col-izquierda {
@@ -481,14 +489,11 @@ text-align: center; }
     }
     th, td {
         padding: 10px;
-        font-size: 13px; /* Letra ligeramente más chica en tablets */
+        font-size: 13px; 
     }
 }
  
 @media (max-width: 768px) { 
-    /* -------------------------------------------------------------
-       1. TUS ESTILOS DEL HEADER (CONSERVADOS AL 100% IMPECABLES)
-       ------------------------------------------------------------- */
     .navbar-top { 
         padding: 0 10px; 
         gap: 8px; 
@@ -533,27 +538,22 @@ text-align: center; }
         height: 32px; 
     } 
 
-    /* -------------------------------------------------------------
-       2. BLINDAJE CONTRA DESBORDES AL AGREGAR PRODUCTOS
-       ------------------------------------------------------------- */
     .contenedor-principal {
         flex-direction: column;
-        overflow-x: hidden !important; /* 🛡️ Escudo total contra el desborde horizontal al recargar */
+        overflow-x: hidden !important;
         overflow-y: visible !important;
         height: auto;
-        width: 100vw !important; /* Ajusta la estructura estrictamente al ancho de la pantalla */
+        width: 100vw !important;
         position: relative;
     }
 
-    /* El menú lateral flota como capa arriba del sistema al dar clic */
     .sidebar {
         z-index: 2500;
         position: fixed;
-        left: -260px; /* Evita parpadeos o desajustes del menú al recargar la URL */
+        left: -260px;
         box-shadow: 5px 0 15px rgba(0,0,0,0.4);
     }
 
-    /* Anula el empuje lateral en celular para evitar que la pantalla se descuadre */
     #toggle-sidebar-check:checked ~ .contenedor-principal .contenido-pagina { 
         margin-left: 0 !important;
         width: 100% !important;
@@ -561,18 +561,15 @@ text-align: center; }
     } 
 
     .contenido-pagina {
-        flex-direction: column-reverse !important; /* Catálogo arriba, carrito abajo */
+        flex-direction: column-reverse !important;
         height: auto;
         gap: 20px;
         padding: 10px;
         width: 100% !important;
         max-width: 100% !important;
-        overflow-x: hidden !important; /* Refuerzo anti-desborde para el cuerpo */
+        overflow-x: hidden !important;
     }
     
-    /* -------------------------------------------------------------
-       3. OPTIMIZACIÓN DE TARJETAS (EVITA EL CARRITO COMPRIMIDO)
-       ------------------------------------------------------------- */
     .col-izquierda {
         width: 100% !important;
         max-width: 100% !important;
@@ -590,7 +587,7 @@ text-align: center; }
     }
 
     table {
-        min-width: 420px; /* Mantiene la tabla legible dentro de su scroll horizontal */
+        min-width: 420px;
     }
 
     th, td {
@@ -598,11 +595,10 @@ text-align: center; }
         font-size: 13px;
     }
 
-    /* 🛠️ SOLUCIÓN MAESTRA: Forzamos al Carrito a no encogerse lateralmente */
     .col-derecha {
         width: 100% !important; 
         max-width: 100% !important;
-        flex-shrink: 0 !important; /* 🛡️ Le prohíbe al navegador aplastar el carrito o mochar los precios */
+        flex-shrink: 0 !important;
         height: auto;
         overflow: visible;
         padding: 15px;
@@ -610,25 +606,24 @@ text-align: center; }
 
     .col-derecha table {
         width: 100% !important;
-        table-layout: fixed !important; /* Mantiene las columnas congeladas a la fuerza */
+        table-layout: fixed !important;
         border-collapse: collapse;
     }
 
     .col-derecha td:first-child {
-        width: 70% !important; /* Le da el 70% de espacio al texto */
+        width: 70% !important;
         white-space: nowrap !important;
         overflow: hidden !important;
-        text-overflow: ellipsis !important; /* Si el nombre está largo, le clava ... para que no empuje el precio */
+        text-overflow: ellipsis !important;
         padding-right: 10px;
     }
 
-    /* 3. Columna del precio (La de la flecha azul - Fila derecha) */
     .col-derecha td:last-child {
-        width: 30% !important; /* Bloquea el 30% restante de la tarjeta */
-        text-align: right !important; /* Alinea el texto a la derecha */
-        white-space: nowrap !important; /* 🛡️ Escudo total: Prohíbe que el precio se corte o se fracture */
+        width: 30% !important; 
+        text-align: right !important; 
+        white-space: nowrap !important;
         font-weight: bold;
-        padding-right: 5px; /* Pequeño colchón para que jamás toque la orilla de la tarjeta */
+        padding-right: 5px;
     }
 
     .carrito-cuerpo-scroll {
@@ -636,10 +631,9 @@ text-align: center; }
         max-height: none;
     }
 
-    /* Estilo limpio para la tabla interna del carrito en celular */
     .carrito-cuerpo-scroll table {
         width: 100% !important;
-        table-layout: fixed; /* 🔥 CONGELA LAS COLUMNAS: Evita que el precio se mueva a la derecha */
+        table-layout: fixed;
     }
     
     .carrito-cuerpo-scroll td {
@@ -648,14 +642,14 @@ text-align: center; }
     }
 
     .carrito-cuerpo-scroll td:first-child {
-        width: 75%; /* Le da la mayoría del espacio al nombre del producto */
+        width: 75%;
         overflow: hidden;
-        text-overflow: ellipsis; /* Si el nombre está larguísimo, pone ... en vez de empujar el precio */
+        text-overflow: ellipsis;
         white-space: nowrap;
     }
 
     .carrito-cuerpo-scroll td:last-child {
-        width: 25%; /* Espacio exacto y congelado para el precio ($38.00) */
+        width: 25%;
         text-align: right;
         white-space: nowrap !important;
         font-weight: bold;
@@ -663,11 +657,9 @@ text-align: center; }
 
 }
  
-/* Ajuste extremo para celulares minis (pantallas menores a 360px) */ 
 @media (max-width: 360px) { 
     .caja-status { 
-        display: none; /* Si el cel es un cacahuate viejo, escondemos la caja para no romper el 
-logo */ 
+        display: none; 
     } 
 } 
 
