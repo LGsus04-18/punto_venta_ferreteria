@@ -69,3 +69,38 @@ ON DUPLICATE KEY UPDATE nombre_producto=VALUES(nombre_producto), precio_venta=VA
 INSERT INTO usuarios (nombre_usuario, password, rol) 
 VALUES ('admin', '$2a$12$cY5cMHzwAZXdXaT.DnkzReKIxLh3QINF5.R4Lvp0JoSMh9rkRIKzG', 'Administrador')
 ON DUPLICATE KEY UPDATE password=VALUES(password);
+
+USE ferreteria_db;
+
+CREATE TABLE IF NOT EXISTS cortes_caja (
+	id_corte INT NOT NULL AUTO_INCREMENT,
+    fecha_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    monto_inicial DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    ventas_acumuladas DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    monto_final DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    id_usuario INT NOT NULL,
+    PRIMARY KEY (id_corte)
+);
+
+CREATE TABLE IF NOT EXISTS proveedores (
+	id_proveedor INT NOT NULL AUTO_INCREMENT,
+    nombre_proveedor VARCHAR(100) NOT NULL,
+    telefono VARCHAR(20),
+    PRIMARY KEY (id_proveedor)
+);
+
+CREATE TABLE IF NOT EXISTS pedidos_proveedor (
+	id_pedido INT NOT NULL AUTO_INCREMENT,
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    id_proveedor INT NOT NULL,
+    producto_solicitado VARCHAR(150) NOT NULL,
+    cantidad INT NOT NULL,
+    estatus VARCHAR(20) NOT NULL DEFAULT 'Pendiente',
+    PRIMARY KEY (id_pedido),
+    FOREIGN KEY (id_proveedor) REFERENCES proveedores(id_proveedor) ON DELETE CASCADE
+);
+
+INSERT IGNORE INTO proveedores (id_proveedor, nombre_proveedor, telefono) VALUES
+	(1, 'Trupper Herramientas', '55-7002-0020'),
+    (2, 'Fandeli Abrasivos', '55-5366-1515'),
+    (3, 'Iusa Electricidad', '800-900-4872');

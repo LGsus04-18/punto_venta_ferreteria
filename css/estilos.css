@@ -1,0 +1,678 @@
+/* 
+======================================================================
+====  
+   CSS GLOBAL UNIFICADO Y RESPONSIVO - FERRETERÍA "LOS CHICARCAS"  
+   
+======================================================================
+==== */  
+  
+:root {  
+    --color-fondo-oscuro: #1A2229;  /* Color del sidebar y header */  
+    --color-principal-naranja: #FF5A00; /* Naranja Chicarca */  
+    --color-fondo-gris-claro: #F5F7FA; /* Fondo de las páginas */  
+    --color-texto-blanco: #FFFFFF;  
+    --color-texto-gris: #A0AEC0;  
+    --color-tarjetas: #FFFFFF;  
+    --color-bordes: #E2E8F0;  
+    --color-exito-verde: #0F5132;  
+    --color-caja-verde: #1E3A2F;  
+}  
+  
+* {  
+    margin: 0;  
+    padding: 0;  
+    box-sizing: border-box;  
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+}  
+  
+body {  
+    background-color: var(--color-fondo-gris-claro);  
+    color: #333;  
+    overflow-x: hidden; /* Evita scrolls laterales raros en cel */ 
+}  
+  
+/* 
+======================================================================
+====  
+   BARRA SUPERIOR (HEADER) FIXED 
+   
+======================================================================
+==== */  
+.navbar-top {  
+    height: 70px; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    z-index: 1000; 
+    display: flex;  
+    justify-content: space-between;  
+    align-items: center;  
+    padding: 0 20px;  
+    background-color: var(--color-fondo-oscuro); 
+    border-bottom: 2px solid #2D3748; 
+    color: var(--color-texto-blanco); 
+} 
+ 
+.btn-hamburguesa-toggle {  
+    font-size: 24px;  
+    color: var(--color-texto-blanco);  
+    cursor: pointer;  
+    margin-right: 15px;  
+    user-select: none;  
+} 
+  
+.logo-area {  
+    display: flex;  
+    align-items: center;  
+    gap: 15px; 
+    cursor: pointer;  
+}  
+  
+.logo-area img {  
+    height: 45px;  
+}
+  
+.user-badge {  
+    display: flex;  
+    align-items: center;  
+    gap: 12px;  
+}   
+ 
+img.perfil { 
+    width: 40px;  
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 2px solid var(--color-principal-naranja); 
+    cursor: pointer; 
+} 
+  
+/* 
+======================================================================
+====  
+   ESTRUCTURA DEL CUERPO (LAYOUT Y SIDEBAR) 
+   
+======================================================================
+==== */  
+.contenedor-principal {  
+    display: flex;  
+    margin-top: 70px; /* Desfase para que el contenido no se meta abajo del header */  
+    height: calc(100vh - 70px);  
+    width: 100%; 
+    overflow: hidden;
+}  
+  
+.sidebar {  
+    width: 260px;  
+    background-color: var(--color-fondo-oscuro);  
+    position: fixed;  
+    top: 70px;  
+    left: -260px; /* Escondido por defecto a la izquierda */  
+    bottom: 0;  
+    z-index: 1500;  
+    transition: left 0.3s ease-in-out;  
+    padding-top: 10px; 
+    box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+}  
+ 
+/* MÁGICA DE LA HAMBURGUESA: Si el check está activo, el menú lateral sale de su 
+escondite */ 
+#toggle-sidebar-check:checked ~ .contenedor-principal .sidebar {  
+    left: 0; 
+}  
+ 
+/* Si el menú sale en compu grande, empuja el contenido hacia la derecha para que no lo 
+tape */ 
+@media (min-width: 993px) { 
+    #toggle-sidebar-check:checked ~ .contenedor-principal .contenido-pagina {  
+        margin-left: 260px; 
+        width: calc(100% - 260px); 
+    }  
+} 
+  
+.sidebar a {  
+    display: flex;  
+    align-items: center;  
+    gap: 15px;  
+    padding: 15px 25px;  
+    color: var(--color-texto-gris);  
+    text-decoration: none;  
+    font-weight: 500;  
+    transition: all 0.3s ease;  
+    border-left: 4px solid transparent;  
+}  
+  
+.sidebar a:hover, .sidebar a.activo {  
+    color: var(--color-texto-blanco);  
+    background-color: #2D3748;  
+}  
+  
+.sidebar a.activo {  
+    border-left-color: var(--color-principal-naranja);  
+    background-color: rgba(255, 90, 0, 0.1);  
+    color: var(--color-principal-naranja);  
+}  
+  
+/* Área del Contenido Principal de Compras */  
+.contenido-pagina {  
+    margin-left: 0; 
+    transition: all 0.3s ease-in-out; 
+    width: 100%;  
+    padding: 20px;
+    display: flex;
+    flex-direction: row !important; /* Lado a lado por defecto */
+    gap: 20px;
+    height: 100%;
+}  
+  
+/* Columnas de Venta de Lado a Lado */  
+.col-izquierda {  
+    flex: 2; 
+    background: var(--color-tarjetas); 
+    border-radius: 12px; 
+    padding: 25px; 
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}  
+  
+.col-derecha {  
+    width: 360px; /* Reducimos un pelín el ancho fijo para que quepa en laptops chicas */
+    background: var(--color-tarjetas); 
+    border-radius: 12px; 
+    padding: 25px; 
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
+    display: flex; 
+    flex-direction: column; 
+    height: 100%;
+}  
+  
+/* 
+======================================================================
+====  
+   COMPONENTES GRÁFICOS (TABLAS, BUSCADOR, BOTONES)  
+   
+======================================================================
+==== */  
+.buscador-caja {  
+    width: 100%;  
+    padding: 12px 16px;  
+    border: 1px solid var(--color-bordes);  
+    border-radius: 8px;  
+    background-color: #F8FAFC;  
+    margin-bottom: 25px;  
+    font-size: 14px;  
+}  
+ 
+.tabla-responsiva { 
+    width: 100%;
+    flex: 1;
+    overflow-y: auto !important;
+    padding-right: 5px;
+} 
+  
+table {  
+    width: 100%;  
+    border-collapse: collapse;  
+}  
+  
+th {  
+    background-color: #F8FAFC;  
+    color: #475569;  
+    font-weight: 600;  
+    text-transform: uppercase;  
+    font-size: 12px;  
+    padding: 12px 16px;  
+    border-bottom: 2px solid var(--color-bordes);  
+    text-align: left;  
+}  
+  
+td {  
+    padding: 16px;  
+    border-bottom: 1px solid var(--color-bordes);  
+    font-size: 14px;  
+}  
+  
+.btn-chicarca {  
+    background-color: var(--color-principal-naranja);  
+    color: white;  
+    border: none;  
+    padding: 10px 20px;  
+    border-radius: 8px;  
+    font-weight: 600;  
+    cursor: pointer;  
+    text-decoration: none;  
+    text-align: center;  
+    transition: background 0.2s;  
+    display: inline-block; 
+}  
+  
+.btn-chicarca:hover { background-color: #D44B00; }  
+.btn-vaciar { color: var(--color-texto-gris); text-decoration: none; font-size: 13px; }  
+  
+.caja-status-abierta {  
+    background-color: #E6F4EA;  
+    color: var(--color-exito-verde);  
+    padding: 8px 16px;  
+    border-radius: 20px;  
+    font-weight: bold;  
+    font-size: 13px;  
+    display: flex;  
+    align-items: center;  
+    gap: 8px;  
+} 
+
+.caja-status-cerrada {  
+    background-color: #f46e85;  
+    color: #7c0d0d;  
+    padding: 8px 16px;  
+    border-radius: 20px;  
+    font-weight: bold;  
+    font-size: 13px;  
+    display: flex;  
+    align-items: center;  
+    gap: 8px;  
+}
+  
+/* 
+======================================================================
+====  
+   PANTALLA DE LOGIN (CONSERVADA EXCELENTE)  
+   
+======================================================================
+==== */  
+.login-contenedor {  
+    min-height: 100vh;  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    background-color: #34424B;  
+    padding: 20px; 
+}  
+  
+.login-tarjeta {  
+    background: #FFFFFF;  
+    padding: 40px 30PX;  
+    border-radius: 16px;  
+    width: 100%;  
+    max-width: 420px;  
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);  
+    text-align: center;  
+} 
+ 
+.login-tarjeta form { text-align: left; margin-top: 20px; } 
+.login-tarjeta label { font-weight: 600; font-size: 14px; color: #333333; display: block; 
+margin-bottom: 5px; } 
+  
+.login-tarjeta input {  
+    width: 100%;  
+    padding: 12px 16px;  
+    border: 1px solid var(--color-bordes);  
+    border-radius: 8px; 
+    font-size: 15px;  
+    margin-bottom: 20px; 
+    outline: none; 
+    transition: all 0.2s ease-in-out; 
+} 
+ 
+.login-tarjeta input:focus { 
+    border-color: var(--color-principal-naranja); 
+    box-shadow: 0 0 0 3px rgba(255,90,0,0.15); 
+} 
+ 
+.btn-login-chicarcas { 
+    background-color: var(--color-principal-naranja); 
+    color: white; 
+    border: none; 
+    width: 100%; 
+    padding: 14px; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    font-size: 16px; 
+    letter-spacing: 0.5px; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    transition: background 0.2s; 
+    margin-top: 5px; 
+} 
+.btn-login-chicarcas:hover { background-color: #D44B00; } 
+ 
+@media(max-width: 480px) { .login-tarjeta { padding: 30px 20px; } } 
+ 
+/* 
+======================================================================
+==== 
+   Timbre de Notificaciones y Dropdowns 
+   
+======================================================================
+==== */ 
+.notificacion-contenedor { display: inline-block; position: relative; } 
+.punto-alerta-naranja { 
+    position: absolute; 
+    top: -5px; 
+    right: -8px; 
+    background-color: var(--color-principal-naranja); 
+    color: white; 
+    font-size: 10px; 
+    font-weight: bold; 
+    border-radius: 50%; 
+    width: 16px; 
+    height: 16px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 0 0 2px var(--color-fondo-oscuro); 
+} 
+ 
+.dropdown-chicarca { position: relative; display: inline-block; }  
+.dropdown-contenido {  
+    display: none;  
+    position: absolute;  
+    right: 0;  
+    top: 45px;  
+    background-color: #FFFFFF;  
+    min-width: 280px;  
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);  
+    border-radius: 8px;  
+    padding: 12px;  
+    z-index: 1050;  
+    border: 1px solid var(--color-bordes);  
+}  
+ 
+.dropdown-chicarca:focus-within .dropdown-contenido { display: block; }  
+.alerta-item-stock { padding: 8px; border-bottom: 1px solid var(--color-bordes); font-size: 
+13px; color: #333; }  
+.alerta-item-stock:last-child { border: none; }  
+.alerta-item-stock span { color: var(--color-principal-naranja); font-weight: bold; }  
+ 
+.user-dropdown-contenido { min-width: 160px !important; text-align: center; }  
+.btn-cerrar-sesion-menu { display: block; padding: 10px; background: #f8d7da; color: 
+#721c24; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 5px; 
+text-align: center; }  
+.btn-cerrar-sesion-menu:hover { background: #f5c6cb; }  
+ 
+/* 
+======================================================================
+==== 
+   
+�
+�
+ CAPA DE MEDIA QUERIES RESPONSIVAS (MÓVIL / TABLET) 
+======================================================================
+==== */ 
+@media (max-width: 992px) { 
+    .contenido-pagina { 
+    flex-direction: column; /* El carrito baja automáticamente en pantallas chicas */ 
+    padding: 15px; 
+    } 
+    .col-derecha { 
+    width: 100%; /* El carrito ocupa todo el ancho abajo */ 
+    }
+
+    #toggle-sidebar-check:checked ~ .contenedor-principal .contenido-pagina{
+        margin-left: 0;
+    }
+}
+
+/* 
+======================================================================
+==== 
+   AFINACIÓN ESTÉTICA Y TIPOGRAFÍA - LOS CHICARCAS 
+   
+======================================================================
+==== */ 
+ 
+/* Forzamos la tipografía limpia y en mayúsculas para los títulos */ 
+.logo-texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+ 
+.logo-texto h2 { 
+    font-family: 'Arial Black', 'Impact', 'Trebuchet MS', sans-serif;
+    text-transform: uppercase;
+    font-size: clamp(14px, 2vw + 10px, 22px);
+    
+    font-weight: 900;
+    color: var(--color-texto-blanco); 
+    line-height: 1;
+    letter-spacing: 1px;
+
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
+
+.logo-texto p { 
+    font-family: 'Segoe UI', Arial, sans-serif;
+    text-transform: lowercase;
+    font-style: italic;
+
+    font-size: clamp(9px, 1vw + 7px, 12px);
+
+    color: var(--color-principal-naranja); 
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-top: 3px;
+    opacity: 0.95;
+    
+    display: block;
+}
+
+.logo-texto p::first-letter{
+    text-transform: uppercase;
+}
+
+.carrito-cuerpo-scroll {
+    flex: 1;
+    overflow-y: auto !important;
+    margin-bottom: 15px;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .navbar-top { padding: 0 15px; }
+    .col-derecha {
+        width: 300px; /* Hacemos el carrito más flaquito para que quepa de lado */
+        padding: 15px;
+    }
+    .col-izquierda {
+        padding: 15px;
+    }
+    th, td {
+        padding: 10px;
+        font-size: 13px; /* Letra ligeramente más chica en tablets */
+    }
+}
+ 
+@media (max-width: 768px) { 
+    /* -------------------------------------------------------------
+       1. TUS ESTILOS DEL HEADER (CONSERVADOS AL 100% IMPECABLES)
+       ------------------------------------------------------------- */
+    .navbar-top { 
+        padding: 0 10px; 
+        gap: 8px; 
+    } 
+ 
+    .logo-texto p { 
+        display: none; 
+    } 
+ 
+    .logo-texto h2 { 
+        font-size: 13px; 
+    } 
+ 
+    .logo-area img { 
+        height: 35px; 
+    } 
+    .logo-area { 
+        gap: 10px; 
+        margin-left: 45px !important; 
+    } 
+ 
+    .caja-status { 
+        padding: 4px 8px; 
+        font-size: 10px; 
+        border-radius: 12px; 
+        max-width: 100px; 
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+    } 
+ 
+    .user-badge { 
+        gap: 8px; 
+    } 
+     
+    .icono-campana { 
+        font-size: 18px !important; 
+    } 
+     
+    img.perfil { 
+        width: 32px; 
+        height: 32px; 
+    } 
+
+    /* -------------------------------------------------------------
+       2. BLINDAJE CONTRA DESBORDES AL AGREGAR PRODUCTOS
+       ------------------------------------------------------------- */
+    .contenedor-principal {
+        flex-direction: column;
+        overflow-x: hidden !important; /* 🛡️ Escudo total contra el desborde horizontal al recargar */
+        overflow-y: visible !important;
+        height: auto;
+        width: 100vw !important; /* Ajusta la estructura estrictamente al ancho de la pantalla */
+        position: relative;
+    }
+
+    /* El menú lateral flota como capa arriba del sistema al dar clic */
+    .sidebar {
+        z-index: 2500;
+        position: fixed;
+        left: -260px; /* Evita parpadeos o desajustes del menú al recargar la URL */
+        box-shadow: 5px 0 15px rgba(0,0,0,0.4);
+    }
+
+    /* Anula el empuje lateral en celular para evitar que la pantalla se descuadre */
+    #toggle-sidebar-check:checked ~ .contenedor-principal .contenido-pagina { 
+        margin-left: 0 !important;
+        width: 100% !important;
+        transform: none !important;
+    } 
+
+    .contenido-pagina {
+        flex-direction: column-reverse !important; /* Catálogo arriba, carrito abajo */
+        height: auto;
+        gap: 20px;
+        padding: 10px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important; /* Refuerzo anti-desborde para el cuerpo */
+    }
+    
+    /* -------------------------------------------------------------
+       3. OPTIMIZACIÓN DE TARJETAS (EVITA EL CARRITO COMPRIMIDO)
+       ------------------------------------------------------------- */
+    .col-izquierda {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto;
+        overflow: visible;
+        padding: 15px;
+    }
+
+    .tabla-responsiva {
+        width: 100%;
+        overflow-x: auto !important; 
+        overflow-y: visible !important;
+        max-height: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        min-width: 420px; /* Mantiene la tabla legible dentro de su scroll horizontal */
+    }
+
+    th, td {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+
+    /* 🛠️ SOLUCIÓN MAESTRA: Forzamos al Carrito a no encogerse lateralmente */
+    .col-derecha {
+        width: 100% !important; 
+        max-width: 100% !important;
+        flex-shrink: 0 !important; /* 🛡️ Le prohíbe al navegador aplastar el carrito o mochar los precios */
+        height: auto;
+        overflow: visible;
+        padding: 15px;
+    }
+
+    .col-derecha table {
+        width: 100% !important;
+        table-layout: fixed !important; /* Mantiene las columnas congeladas a la fuerza */
+        border-collapse: collapse;
+    }
+
+    .col-derecha td:first-child {
+        width: 70% !important; /* Le da el 70% de espacio al texto */
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important; /* Si el nombre está largo, le clava ... para que no empuje el precio */
+        padding-right: 10px;
+    }
+
+    /* 3. Columna del precio (La de la flecha azul - Fila derecha) */
+    .col-derecha td:last-child {
+        width: 30% !important; /* Bloquea el 30% restante de la tarjeta */
+        text-align: right !important; /* Alinea el texto a la derecha */
+        white-space: nowrap !important; /* 🛡️ Escudo total: Prohíbe que el precio se corte o se fracture */
+        font-weight: bold;
+        padding-right: 5px; /* Pequeño colchón para que jamás toque la orilla de la tarjeta */
+    }
+
+    .carrito-cuerpo-scroll {
+        overflow-y: visible !important;
+        max-height: none;
+    }
+
+    /* Estilo limpio para la tabla interna del carrito en celular */
+    .carrito-cuerpo-scroll table {
+        width: 100% !important;
+        table-layout: fixed; /* 🔥 CONGELA LAS COLUMNAS: Evita que el precio se mueva a la derecha */
+    }
+    
+    .carrito-cuerpo-scroll td {
+        padding: 8px 4px;
+        font-size: 13px;
+    }
+
+    .carrito-cuerpo-scroll td:first-child {
+        width: 75%; /* Le da la mayoría del espacio al nombre del producto */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Si el nombre está larguísimo, pone ... en vez de empujar el precio */
+        white-space: nowrap;
+    }
+
+    .carrito-cuerpo-scroll td:last-child {
+        width: 25%; /* Espacio exacto y congelado para el precio ($38.00) */
+        text-align: right;
+        white-space: nowrap !important;
+        font-weight: bold;
+    }
+
+}
+ 
+/* Ajuste extremo para celulares minis (pantallas menores a 360px) */ 
+@media (max-width: 360px) { 
+    .caja-status { 
+        display: none; /* Si el cel es un cacahuate viejo, escondemos la caja para no romper el 
+logo */ 
+    } 
+} 
+
+@media (max-width: 480px) {
+    .logo-texto p {
+        display: none;
+    }
+}
