@@ -6,6 +6,9 @@
         exit();
     }
 
+    require_once "config/permisos.php";
+bloquear_restringidos();
+
     if (!isset($_GET['id_corte']) || empty($_GET['id_corte'])) {
         die("Error: ID de corte no especificado.");
     }

@@ -5,6 +5,9 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: login.php"); 
     exit(); 
 } 
+
+require_once "config/permisos.php";
+bloquear_restringidos();
  
 $mensaje_prov = ""; 
  
@@ -33,6 +36,7 @@ $productos_bajos = $conexion->query("SELECT nombre_producto, stock FROM producto
 <html lang="es"> 
 <head> 
     <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Los Chicarcas - Pedidos</title> 
     <link rel="stylesheet" href="css/estilos.css"> 
 </head> 
